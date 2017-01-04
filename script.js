@@ -23,7 +23,7 @@ var tooltip = d3.select("#medalChart").append("div")
 
 var getGdp = function(d) {
       //gdp = 
-      return Math.round(d._2015_gdp_per_capita); 
+      return '$' + Math.round(d._2015_gdp_per_capita).toLocaleString(); 
     };
 
 var getMedals = function(d) { return d.total; };
@@ -72,7 +72,7 @@ svg.selectAll(".dot")
       .data(data)
       .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 3)
+      .attr("r", 3.5)
       .attr("cx", function(d) { return x(d._2015_gdp_per_capita); })
       .attr("cy", function(d) { return y(d.total); })
       .style("fill", "red")

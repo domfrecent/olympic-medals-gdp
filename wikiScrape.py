@@ -49,19 +49,14 @@ for row in rows:
         
         #Combine Ireland and GBR as United Kingdom
         if row.th.a.string == 'Ireland' or row.th.a.string == 'Great Britain':
-
             ukGold += int(medals[0].string)
             ukSilver += int(medals[1].string)
             ukBronze += int(medals[2].string)
             ukTotal += int(medals[3].string)
-
         elif 'd\'Ivoire' in row.th.a.string:
-
             newRow = [unicode('Ivory Coast'), int(medals[0].string), int(medals[1].string), int(medals[2].string), int(medals[3].string)]
             medalTable.append(newRow)
-
         else:
-
             newRow = [unicode(row.th.a.string), int(medals[0].string), int(medals[1].string), int(medals[2].string), int(medals[3].string)]
             medalTable.append(newRow)
 
@@ -88,13 +83,10 @@ try:
         for row in reader:
 
             #Use header row as is (i.e. with string values)
-            if row[0] == 'Country Name': 
-                
+            if row[0] == 'Country Name':  
                 gdpHeaders = [formatColumnName(cell) for cell in row]
-            
             #All other rows, convert numerical columns from string to float    
             else:
-                #print unicode(row[0])
                 newRow = []
                 newRow.append(unicode(row[0]))
                 newRow.append(unicode(row[1]))
@@ -135,6 +127,7 @@ query = """SELECT m.country as country,
            LEFT JOIN gdp_df g
            ON m.country = g.country_name
            WHERE m.country NOT IN (\'Independent Olympic Athletes\', \'Chinese Taipei\')
+           AND cast(_2015_gdp_per_capita as int) != 0
         """
 
 final_df = sqldf(query, locals())
