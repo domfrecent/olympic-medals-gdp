@@ -84,11 +84,23 @@ svg.selectAll(".dot")
           + ", " + getMedals(d) + ")")
                .style("left", (d3.event.pageX + 5) + "px")
                .style("top", (d3.event.pageY - 28) + "px");
+
+          d3.select(this)
+            .transition()
+            .duration(200)
+            .style("fill", "lightblue")
+            .attr("r", 6);
       })
       .on("mouseout", function(d) {
           tooltip.transition()
                .duration(500)
                .style("opacity", 0);
+
+          d3.select(this)
+            .transition()
+            .duration(400)
+            .style("fill", "red")
+            .attr("r", 3.5);
       });
 
 });
